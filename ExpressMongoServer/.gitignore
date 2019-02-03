@@ -2,7 +2,7 @@ apikey alphavantage.txt
 # Created by https://www.gitignore.io/api/node,ember
 # Edit at https://www.gitignore.io/?templates=node,ember
 
-ExpressMongoServer/apikey.js
+apikey.js
 ### Ember ###
 # see https://github.com/ember-cli/ember-cli/blob/master/blueprints/app/files/gitignore
 # compiled output
