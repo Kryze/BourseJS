@@ -7,7 +7,8 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('bourse');
+  this.route('bourse',{ path: '/bourse'});
+  this.route('bourse',{ path: '/bourse/:symbol' });
 });
 
 export default Router;

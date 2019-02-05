@@ -60,23 +60,19 @@ app.route('/stocks')
 app.route('/api/daily/:symbol')
 .get((request,response,next) => {
     let symbol = request.params.symbol;
-    requester('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+symbol+'&apikey='+apikey.key, { json: true }, (err, res, body) => {
+    requester('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol='+symbol+'&apikey='+apikey.key, { json: true }, (err, res, body) => {
     if (err) { return console.log(err); }
-    let dayvar = body["Meta Data"]["3. Last Refreshed"];
-    let dayvalue = body["Time Series (Daily)"][dayvar]["1. open"];
-    response.json(dayvalue);
+    response.json(body);
     });
 })
-/*.post((request,response,next) => {
-    let stock = new Stock(request.body);
-    stock.save((err) => {
-        if(err){
-            return next(err);
-        } else {
-            response.json(stock);
-        }
+
+app.route('/api/daily/')
+.get((request,response,next) => {
+    requester('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=AAPL&apikey='+apikey.key, { json: true }, (err, res, body) => {
+    if (err) { return console.log(err); }
+    response.json(body);
     });
-});*/
+})
 
 app.use(express.static('./public'));
 

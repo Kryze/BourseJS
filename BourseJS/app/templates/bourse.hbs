@@ -6,13 +6,15 @@
           </a>
         </div>
     </nav>
+  {{input type="text" value=symbol}}
+  <button {{action 'loadsymbol'}}>Submit</button>
     <section class="section">
     <div class="columns">
         <div class="column">
             <div class="card">
                 <header class="card-header">
                   <p class="card-header-title">
-                    AAPL : {{model}}
+                    {{model.[Global Quote].[01. symbol]}} : {{model.[Global Quote].[02. open]}}
                   </p>
                 </header>
                 <div class="card-content">
@@ -101,8 +103,8 @@
     <footer class="footer">
         <div class="content has-text-centered">
                 <p>
-                  <strong>BourseJS</strong> par <a href="https://kryze.github.io">Benjamin Rath</a>. 
-                </p>
+                  <strong>BourseJS</strong> par <a href="https://kryze.github.io">Benjamin Rath</a>.
+                </p> 
          </div>
     </footer>
 {{outlet}}
