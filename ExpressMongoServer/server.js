@@ -25,6 +25,7 @@ let Stock = mongoose.model('Stock',StockSchema);
 let BoughtSchema = new mongoose.Schema({
     symbol: String,
     price : Number,
+    date : String
 })
 
 let Bought = mongoose.model('Bought',BoughtSchema);

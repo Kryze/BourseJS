@@ -51,21 +51,19 @@
                     <table class="table">
                         <thead>
                           <tr>
-                            <th><abbr title="">Test1</abbr></th>
-                            <th><abbr title="">Test2</abbr></th>
-                            <th><abbr title="">Test3</abbr></th>
-                            <th><abbr title="">Test4</abbr></th>
-                            <th><abbr title="">Test5</abbr></th>
+                            <th><abbr title="Symbole">Symbole</abbr></th>
+                            <th><abbr title="Date">Date</abbr></th>
+                            <th><abbr title="Prix Achat">Prix Achat</abbr></th>
                           </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>38</td>
-                                <td>23</td>
-                                <td>12</td>
-                                <td>38</td>
-                                <td>23</td>
-                            </tr>
+                                {{#each (recuperer-actions) as |val| }}
+                                <tr>
+                                <td>{{val.[symbol]}}</td>
+                                <td>{{val.[date]}}</td>
+                                <td>{{val.[price]}}</td>
+                                </tr>
+                                {{/each}}
                         </tbody>
                       </table>
                 </div>
