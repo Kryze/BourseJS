@@ -14,23 +14,25 @@
             <div class="card">
                 <header class="card-header">
                   <p class="card-header-title">
-                    {{model.[Global Quote].[01. symbol]}} : {{model.[Global Quote].[02. open]}}
+                    Actions
                   </p>
                 </header>
                 <div class="card-content">
                     <table class="table">
                         <thead>
                           <tr>
-                            <th><abbr title="">Test1</abbr></th>
-                            <th><abbr title="">Test2</abbr></th>
-                            <th><abbr title="">Test3</abbr></th>
+                            <th><abbr title="Symbole">Symbole</abbr></th>
+                            <th><abbr title="Date">Date</abbr></th>
+                            <th><abbr title="Prix">Prix</abbr></th>
+                            <th><abbr title=""></abbr></th>
                           </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>38</td>
-                                <td>23</td>
-                                <td>12</td>
+                                <td>{{model.[Global Quote].[01. symbol]}}</td>
+                                <td>{{model.[Global Quote].[07. latest trading day]}}</td>
+                                <td>{{model.[Global Quote].[02. open]}}</td>
+                                <td><a class="button is-link" {{action 'acheterAction'}}>Acheter</a></td>
                             </tr>
                         </tbody>
                       </table>

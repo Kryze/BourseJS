@@ -4,9 +4,8 @@ let requester = require('request');
 let apikey = require('./apikey.js');
 let app = express();
 
-
+app.use(bodyParser.json())
 app.use(function(req, res, next){
-    bodyParser.json()
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -23,9 +22,17 @@ let StockSchema = new mongoose.Schema({
 
 let Stock = mongoose.model('Stock',StockSchema);
 
+let BoughtSchema = new mongoose.Schema({
+    symbol: String,
+    price : Number,
+})
 
-/*let s = new Stock({
-    name : "Apple",
+let Bought = mongoose.model('Bought',BoughtSchema);
+
+//let Stock = mongoose.model('Stock',StockSchema);
+
+
+/*let s = new Bought({
     symbol : "AAPL",
     price : 12.3
 });
@@ -57,6 +64,31 @@ app.route('/stocks')
     });
 });
 
+//On définit les deux fonctions sur la même route
+app.route('/bought')
+.get((request,response,next) => {
+    Bought.find({},(err,boughts) => {
+        if(err){
+            return next(err);
+        } else{
+            response.json(boughts);
+        }
+    }); // Fonction de callback bc async
+})
+.post((request,response,next) => {
+    let bought = new Bought(request.body);
+    console.log(request.body)
+    bought.save((err) => {
+        if(err){
+            return next(err);
+        } else {
+            response.json(bought);
+        }
+    });
+});
+
+
+
 app.route('/api/daily/:symbol')
 .get((request,response,next) => {
     let symbol = request.params.symbol;
@@ -65,6 +97,8 @@ app.route('/api/daily/:symbol')
     response.json(body);
     });
 })
+
+
 
 app.route('/api/daily/')
 .get((request,response,next) => {
