@@ -11,4 +11,5 @@ Router.map(function() {
   this.route('bourse',{ path: '/bourse/:symbol' });
 });
 
+
 export default Router;

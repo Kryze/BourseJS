@@ -29,9 +29,9 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{model.[Global Quote].[01. symbol]}}</td>
-                                <td>{{model.[Global Quote].[07. latest trading day]}}</td>
-                                <td>{{model.[Global Quote].[02. open]}}</td>
+                                <td>{{model.symbols.[Global Quote].[01. symbol]}}</td>
+                                <td>{{model.symbols.[Global Quote].[07. latest trading day]}}</td>
+                                <td>{{model.symbols.[Global Quote].[02. open]}}</td>
                                 <td><a class="button is-link" {{action 'acheterAction'}}>Acheter</a></td>
                             </tr>
                         </tbody>
@@ -57,7 +57,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                                {{#each (recuperer-actions) as |val| }}
+                                {{#each model.boughts as |val| }}
                                 <tr>
                                 <td>{{val.[symbol]}}</td>
                                 <td>{{val.[date]}}</td>
