@@ -8,6 +8,7 @@ app.use(bodyParser.json())
 app.use(function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     next();
 });
 
@@ -29,6 +30,17 @@ let BoughtSchema = new mongoose.Schema({
 })
 
 let Bought = mongoose.model('Bought',BoughtSchema);
+
+let SoldSchema = new mongoose.Schema({
+    symbol: String,
+    priceBought : Number,
+    priceSold : Number,
+    dateBought : String,
+    dateSold : String,
+    gain : Number
+})
+
+let Sold = mongoose.model('Sold',SoldSchema);
 
 //let Stock = mongoose.model('Stock',StockSchema);
 
@@ -63,7 +75,7 @@ app.route('/stocks')
             response.json(stock);
         }
     });
-});
+})
 
 //On définit les deux fonctions sur la même route
 app.route('/bought')
@@ -86,7 +98,52 @@ app.route('/bought')
             response.json(bought);
         }
     });
-});
+})
+
+app.route('/bought/:id')
+.get((request,response,next) => {
+    var id = request.params.id
+    Bought.findById(id,(err,boughts) => {
+        if(err){
+            return next(err);
+        } else{
+            response.json(boughts);
+        }
+    }); // Fonction de callback bc async
+})
+.put((request,response,next) => {
+    var id = request.params.id
+    console.log(request.body)
+    Bought.remove({_id : id},(err,boughts) => {
+        if(err){
+            return next(err);
+        } else{
+            response.json(boughts);
+        }
+    });
+})
+
+app.route('/sold')
+.get((request,response,next) => {
+    Sold.find({},(err,solds) => {
+        if(err){
+            return next(err);
+        } else{
+            response.json(solds);
+        }
+    }); // Fonction de callback bc async
+})
+.post((request,response,next) => {
+    let sold = new Sold(request.body);
+    console.log(request.body)
+    sold.save((err) => {
+        if(err){
+            return next(err);
+        } else {
+            response.json(sold);
+        }
+    });
+})
 
 
 

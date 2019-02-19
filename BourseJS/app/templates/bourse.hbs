@@ -54,6 +54,7 @@
                             <th><abbr title="Symbole">Symbole</abbr></th>
                             <th><abbr title="Date">Date</abbr></th>
                             <th><abbr title="Prix Achat">Prix Achat</abbr></th>
+                            <th><abbr title=""></abbr></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -62,6 +63,7 @@
                                 <td>{{val.[symbol]}}</td>
                                 <td>{{val.[date]}}</td>
                                 <td>{{val.[price]}}</td>
+                                <td><a class="button is-success" data-id={{val.[_id]}}  onclick={{action 'vendreAction'}}>Vendre</a></td>
                                 </tr>
                                 {{/each}}
                         </tbody>
@@ -89,11 +91,34 @@
             <div class="card">
                 <header class="card-header">
                   <p class="card-header-title">
-                    Gain
+                    Solde Porte-monnaie
                   </p>
                 </header>
                 <div class="card-content">
-                  
+                  <table class="table">
+                        <thead>
+                          <tr>
+                            <th><abbr title="Symbole">Symbole</abbr></th>
+                            <th><abbr title="Prix Acheté">Prix Acheté</abbr></th>
+                            <th><abbr title="Prix Vendue">Prix Vendue</abbr></th>
+                            <th><abbr title="Date Acheté">Date Acheté</abbr></th>
+                            <th><abbr title="Date Vendue">Date Vendue</abbr></th>
+                            <th><abbr title="Gain">Gain</abbr></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                                {{#each model.solds as |val2| }}
+                                <tr>
+                                <td>{{val2.[symbol]}}</td>
+                                <td>{{val2.[priceBought]}}</td>
+                                <td>{{val2.[priceSold]}}</td>
+                                <td>{{val2.[dateBought]}}</td>
+                                <td>{{val2.[dateSold]}}</td>
+                                <td>{{val2.[gain]}}</td>
+                                </tr>
+                                {{/each}}
+                        </tbody>
+                      </table>
                 </div>
                 
             </div>

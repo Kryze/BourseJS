@@ -13,7 +13,8 @@ export default Route.extend({
  },
  model(params) {
     let symbols;
-    let boughts
+    let boughts;
+    let solds;
     if(params.symbol){
         symbols = $.ajax({ url: 'http://localhost:3000/api/daily/'+params.symbol, type: 'get' })
     }
@@ -24,9 +25,14 @@ export default Route.extend({
     let res = $.ajax({ url : "http://localhost:3000/bought/",async:false,dataType:'text',type: 'GET', success: function(data){ return data }});
     boughts =  JSON.parse(res["responseText"]);
 
+    
+    let res2 = $.ajax({ url : "http://localhost:3000/sold/",async:false,dataType:'text',type: 'GET', success: function(data){ return data }});
+    solds =  JSON.parse(res2["responseText"]);
+
     return hash({
         symbols: symbols,
-        boughts: boughts
+        boughts: boughts,
+        solds :  solds
     });
  }
  
