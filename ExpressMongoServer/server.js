@@ -15,13 +15,13 @@ app.use(function(req, res, next){
 let mongoose = require('mongoose');
 let db = mongoose.connect('mongodb://localhost/server', {useNewUrlParser : true});
 
-let StockSchema = new mongoose.Schema({
+/*let StockSchema = new mongoose.Schema({
     name: String,
     symbol : String,
     price : Number
 })
 
-let Stock = mongoose.model('Stock',StockSchema);
+let Stock = mongoose.model('Stock',StockSchema);*/
 
 let BoughtSchema = new mongoose.Schema({
     symbol: String,
@@ -56,7 +56,7 @@ app.get('/', (request,response) => {
 })
 
 //On définit les deux fonctions sur la même route
-app.route('/stocks')
+/*app.route('/stocks')
 .get((request,response,next) => {
     Stock.find({},(err,stocks) => {
         if(err){
@@ -75,7 +75,7 @@ app.route('/stocks')
             response.json(stock);
         }
     });
-})
+})*/
 
 //On définit les deux fonctions sur la même route
 app.route('/bought')

@@ -6,8 +6,12 @@
           </a>
         </div>
     </nav>
-  {{input type="text" value=symbol}}
-  <button {{action 'loadsymbol'}}>Submit</button>
+  <section class="section">
+  <div class="columns is-centered">
+    {{input placeholder="Indiquer un symbole..." type="text" value=symbol}}
+    <button class="button is-link" {{action 'loadsymbol'}}>Recherche</button>
+  </div>
+  </section>
     <section class="section">
     <div class="columns">
         <div class="column">
