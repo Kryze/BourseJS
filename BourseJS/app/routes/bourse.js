@@ -3,7 +3,9 @@ import $ from 'jquery'
 import { hash } from 'rsvp';
 
 
-
+//Vendre et faire du joli sur si on gagne on perd de l'argent avec l'action
+//Afficher le montant du Porte Monnaie
+//
 
 export default Route.extend({
  actions: {
@@ -33,11 +35,13 @@ export default Route.extend({
     let res3 = $.ajax({ url : "http://localhost:3000/money/",async:false,dataType:'text',type: 'GET', success: function(data){ return data }});
     moneys =  JSON.parse(res3["responseText"]);
     
+    let current = parseInt(moneys.get('lastObject').amount)
     return hash({
         symbols: symbols,
         boughts: boughts,
         solds :  solds,
-        moneys : moneys
+        moneys : moneys,
+        current : current
     });
  },
  afterModel: function(model) {

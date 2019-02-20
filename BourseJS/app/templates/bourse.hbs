@@ -95,10 +95,11 @@
             <div class="card">
                 <header class="card-header">
                   <p class="card-header-title">
-                    Historique Porte-monnaie
+                    Porte-monnaie : 
                   </p>
                 </header>
                 <div class="card-content">
+                  <div style="text-align:center;font-size:22px">Montant actuel : {{ colorAmount model.current }} $</div>
                   <table class="table">
                         <thead>
                           <tr>
@@ -118,7 +119,7 @@
                                 <td>{{val2.[priceSold]}}</td>
                                 <td>{{val2.[dateBought]}}</td>
                                 <td>{{val2.[dateSold]}}</td>
-                                <td>{{val2.[gain]}}</td>
+                                <td>{{colorAmount val2.[gain] }}</td>
                                 </tr>
                                 {{/each}}
                         </tbody>
