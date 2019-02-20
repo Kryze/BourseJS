@@ -42,6 +42,16 @@ let SoldSchema = new mongoose.Schema({
 
 let Sold = mongoose.model('Sold',SoldSchema);
 
+let MoneySchema = new mongoose.Schema({
+    amount : Number,
+    date : String
+},
+{
+    timestamps: true
+})
+
+let Money = mongoose.model('Money',MoneySchema);
+
 //let Stock = mongoose.model('Stock',StockSchema);
 
 
@@ -95,6 +105,19 @@ app.route('/bought')
         if(err){
             return next(err);
         } else {
+            let current;
+            Money.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
+                if (err) { }
+                else if (!post) {
+                    let money = new Money({amount:-request.body.price,date:request.body.date})
+                    money.save();
+                }
+                else{
+                    current = post.amount
+                    let money = new Money({amount:current-request.body.price,date:request.body.date})
+                    money.save();
+                }
+            });
             response.json(bought);
         }
     });
@@ -140,9 +163,33 @@ app.route('/sold')
         if(err){
             return next(err);
         } else {
+            let current;
+            Money.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, post) {
+                if (err) { }
+                else if (!post) {
+                    let money = new Money({amount:request.body.priceSold,date:request.body.date})
+                    money.save();
+                }
+                else{
+                    current = post.amount
+                    let money = new Money({amount:current+parseInt(request.body.priceSold),date:request.body.date})
+                    money.save();
+                }
+            });
             response.json(sold);
         }
     });
+})
+
+app.route('/money')
+.get((request,response,next) => {
+    Money.find({},(err,moneys) => {
+        if(err){
+            return next(err);
+        } else{
+            response.json(moneys);
+        }
+    }); // Fonction de callback bc async
 })
 
 
