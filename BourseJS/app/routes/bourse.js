@@ -20,7 +20,7 @@ export default Route.extend({
         symbols = $.ajax({ url: 'http://localhost:3000/api/daily/'+params.symbol, type: 'get' })
     }
     else{
-        symbols = $.ajax({ url: 'http://localhost:3000/api/daily/'})
+        this.transitionTo('bourse','AAPL')
     }
 
     let res = $.ajax({ url : "http://localhost:3000/bought/",async:false,dataType:'text',type: 'GET', success: function(data){ return data }});
@@ -32,14 +32,19 @@ export default Route.extend({
 
     let res3 = $.ajax({ url : "http://localhost:3000/money/",async:false,dataType:'text',type: 'GET', success: function(data){ return data }});
     moneys =  JSON.parse(res3["responseText"]);
-
+    
     return hash({
         symbols: symbols,
         boughts: boughts,
         solds :  solds,
         moneys : moneys
     });
+ },
+ afterModel: function(model) {
+    this.controllerFor('bourse').send('createChart',model);
  }
+
+ 
  
 });
 

@@ -34,7 +34,7 @@ export default Controller.extend({
             }
         });
         this.send("sessionChanged")
-        this.send("createChart")
+        //this.send("createChart")
         },
 
     vendreAction: function(event){
@@ -86,11 +86,12 @@ export default Controller.extend({
                     contentType: "application/json"
         })
         this.send("sessionChanged");
-        this.send("createChart");
+        //this.send("createChart");
     },
 
-    createChart: function(){
-        let moneys = this.get('model.moneys')
+    createChart: function(model){
+        let moneys = model.moneys
+        //let moneys = this.get('model.moneys')
         let dates = new Array();
         let amounts = new Array();
 
