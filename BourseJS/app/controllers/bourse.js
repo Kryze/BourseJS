@@ -14,7 +14,7 @@ export default Controller.extend({
 
     acheterAction: function() {
         let symbol = this.get('model.symbols')["Global Quote"]["01. symbol"]
-        let price = this.get('model.symbols')["Global Quote"]["02. open"]
+        let price = parseInt(this.get('model.symbols')["Global Quote"]["02. open"])
         let date = this.get('model.symbols')["Global Quote"]["07. latest trading day"]
         $.ajax({ url : "http://localhost:3000/bought/",
             type: 'POST',
@@ -48,7 +48,7 @@ export default Controller.extend({
         })
         res = JSON.parse(res["responseText"])
         let symbol = res["symbol"]
-        let price = res["price"]
+        let price = parseInt(res["price"])
         let date = res["date"]
 
         let d = new Date();
@@ -67,7 +67,7 @@ export default Controller.extend({
             data: JSON.stringify({ 
                 symbol: symbol,
                 priceBought : price,
-                priceSold : s["Global Quote"]["02. open"],
+                priceSold : parseInt(s["Global Quote"]["02. open"]),
                 dateBought : date,
                 dateSold : today,
                 gain : gain,               
@@ -116,7 +116,7 @@ export default Controller.extend({
         options: {
             title: {
             display: true,
-            text: 'World population per region (in millions)'
+            text: 'Evolution du Portefeuille au cours du temps'
             }
         }
         });

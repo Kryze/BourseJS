@@ -35,7 +35,7 @@
                             <tr>
                                 <td>{{model.symbols.[Global Quote].[01. symbol]}}</td>
                                 <td>{{model.symbols.[Global Quote].[07. latest trading day]}}</td>
-                                <td>{{model.symbols.[Global Quote].[02. open]}}</td>
+                                <td>{{decimal model.symbols.[Global Quote].[02. open]}}</td>
                                 <td><a class="button is-link" {{action 'acheterAction'}}>Acheter</a></td>
                             </tr>
                         </tbody>
@@ -99,7 +99,7 @@
                   </p>
                 </header>
                 <div class="card-content">
-                  <div style="text-align:center;font-size:22px">Montant actuel : {{ colorAmount model.current }} $</div>
+                  <div style="text-align:center;font-size:22px">Historique des ventes (Montant actuel : {{model.moneys.lastObject.amount}} $)</div>
                   <table class="table">
                         <thead>
                           <tr>
